@@ -44,12 +44,12 @@ java -Djava.net.preferIPv4Stack=true -jar target/aligo-travel-agent-1.0.0.jar
 
 ### 服务器部署
 
-`deploy/` 目录提供一键部署脚本和构建产物：
-
 ```bash
-# 1. 上传 deploy/ 下的 install.sh 和 jar 到服务器
-# 2. 修改 install.sh 中的 OPENROUTER_API_KEY 为你自己的 Key
-# 3. 执行
+# 1. 本地构建 jar
+mvn -q package -DskipTests
+
+# 2. 上传 deploy/install.sh 和 target/ 下的 jar 到服务器同一目录
+# 3. 修改 install.sh 中的 OPENROUTER_API_KEY 为你自己的 Key，然后执行
 bash install.sh
 ```
 
@@ -72,10 +72,21 @@ bash install.sh
 ## 仓库结构
 
 ```
+pom.xml                            Maven 构建配置
 deploy/
-  install.sh                      一键部署脚本
-  aligo-travel-agent-1.0.0.jar    构建产物（Spring Boot Fat Jar）
-README.md
+  install.sh                       一键部署脚本（systemd + Nginx SSE 配置）
+src/main/java/io/aligo/travel/
+  agent/        编排服务、子 Agent 工厂、Prompt 中间件
+  context/      动态 Prompt 状态机、三表记忆、记忆栈、槽位提取
+  intent/       意图识别（快慢车道路由决策）
+  model/        模型工厂 + 确定性 Mock 剧本（双模型降级）
+  observe/      Trace/Span 链路追踪、IP 限流、日预算守护
+  rag/          差旅政策知识库（关键词打分检索）
+  tool/         业务工具（机票/酒店/天气/审批/行程卡片）
+  web/          Chat / Debug / Health Controller
+src/main/resources/
+  application.yml                  模型与防护配置
+  static/                          前端页面（落地页 / 对话页 / 调试页 / 技术拆解）
 ```
 
 ## License
