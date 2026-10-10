@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+travel:
+  llm:
+    # mock（剧本模型，零依赖可复现） | dashscope（通义千问，需 DASHSCOPE_API_KEY）
+    # | openrouter（OpenRouter OpenAI 兼容，需 OPENROUTER_API_KEY）
+    provider: openrouter
+    model-id: openrouter:deepseek/deepseek-v4.1-flash
+    base-url: https://openrouter.ai/api/v1
+    # 真模型无 key 时自动降级 mock，保证系统在任何环境可复现
+    fallback-to-mock: true
+  guard:
+    # 上线防护：IP 滑动窗口限流 + 真模型日 token 预算（超限自动降级 mock）
+    rate-limit-per-min: 4
+    daily-budget-tokens: 500000
+    # 成本观测计价（$/1M tokens，deepseek-v4.1-flash）
+    price-in: 0.3
+    price-out: 1.2
+
+logging:
+  level:
+    io.aligo.travel: INFO

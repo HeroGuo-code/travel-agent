@@ -1,0 +1,36 @@
+# Maven
+target/
+*.class
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# 运行时数据
+data/*.db
+data/*.db-*
+data/*.journal
+chrome_headless_profile/
+
+# 截图
+.shots/
+*.png
+
+# 部署产物（jar 放 GitHub Release）
+deploy/*.jar
+
+# 答辩 / 面试材料
+答辩*.md
+答辩*.pptx
+讲稿.md
+论文章节.md
+Agent面试*.pdf
+Agent面试*.md
+项目面试稿.md
+build_ppt.py
+build_interview_pdf.py
+genpdf.ps1
+home_big.png
+start-server.ps1
+java_boot.ps1

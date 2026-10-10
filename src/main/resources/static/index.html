@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AliGo 智能差旅助手 · 多智能体编排 + 全链路观测</title>
+<link rel="stylesheet" href="app.css">
+<style>
+  body {
+    display: flex; min-height: 100vh; flex-direction: column; justify-content: center; align-items: center;
+    padding: 48px 32px; position: relative; overflow-x: hidden;
+    background:
+      radial-gradient(900px 460px at 50% -80px, rgba(59, 108, 246, .13), transparent 70%),
+      radial-gradient(700px 380px at 85% 22%, rgba(124, 58, 237, .07), transparent 70%),
+      var(--bg);
+  }
+  .hero { max-width: 1060px; width: 100%; text-align: center; position: relative; z-index: 1; }
+  .hero .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px; font-size: 13.5px; color: var(--accent);
+    background: var(--accent-soft); border: 1px solid #c9d7fd; border-radius: 999px;
+    padding: 6px 20px; margin-bottom: 26px; font-weight: 600;
+  }
+  .hero .eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .hero h1 { font-size: 46px; margin: 0 0 18px; font-weight: 800; letter-spacing: .5px; line-height: 1.25; }
+  .hero h1 .grad {
+    background: linear-gradient(100deg, #3b6cf6 10%, #7c3aed 60%, #3b6cf6 95%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero .tagline { color: var(--muted); font-size: 16px; line-height: 2.1; margin-bottom: 36px; }
+  .entry { display: flex; gap: 16px; justify-content: center; margin-bottom: 52px; flex-wrap: wrap; }
+  .entry a {
+    display: inline-block; padding: 15px 44px; border-radius: 12px; font-size: 16.5px; font-weight: 600;
+    text-decoration: none; transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .entry .primary {
+    background: linear-gradient(135deg, #3b6cf6, #5a8bff); color: #fff;
+    box-shadow: 0 6px 20px rgba(59, 108, 246, .32);
+  }
+  .entry .primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(59, 108, 246, .4); }
+  .entry .ghost { border: 1px solid var(--line-strong); color: var(--text); background: var(--panel); box-shadow: var(--shadow-sm); }
+  .entry .ghost:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--accent); color: var(--accent); }
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; text-align: left; }
+  .fact {
+    background: rgba(255, 255, 255, .85); backdrop-filter: blur(8px); border: 1px solid var(--line);
+    border-radius: 14px; padding: 24px 26px; box-shadow: var(--shadow-sm);
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .fact:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .fact .k { font-size: 15.5px; font-weight: 700; margin-bottom: 9px; display: flex; align-items: center; gap: 9px; }
+  .fact .k::before { content: ""; width: 8px; height: 8px; border-radius: 2px; transform: rotate(45deg); background: linear-gradient(135deg, #3b6cf6, #7c3aed); flex-shrink: 0; }
+  .fact .v { font-size: 13.5px; color: var(--muted); line-height: 1.9; }
+  .foot { margin-top: 46px; display: inline-flex; align-items: center; gap: 10px; padding: 10px 22px;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 999px; box-shadow: var(--shadow-sm);
+    font-size: 13.5px; color: var(--muted); }
+  .foot b { color: var(--text); font-weight: 600; }
+  .foot .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="eyebrow">AgentScope 2.0 · Java 多智能体</div>
+  <h1>AliGo 智能差旅助手<br><span class="grad">编排可解释 · 全链路可观测</span></h1>
+  <div class="tagline">
+    复刻阿里商旅多智能体差旅助手最佳实践：快慢双车道意图路由 · Handoffs / Routing 混合调度<br>
+    动态 Prompt 状态机 · 三表记忆 · Langfuse 风格全链路追踪与成本观测
+  </div>
+  <div class="entry">
+    <a class="primary" href="chat.html">进入智能对话 →</a>
+    <a class="ghost" href="debug.html">查看调用链与运营统计</a>
+  </div>
+  <div class="facts">
+    <div class="fact"><div class="k">双车道调度</div><div class="v">单意图规则引擎直达（快），复合意图 LLM 显式推理两段式拆分（慢），并行调度子智能体</div></div>
+    <div class="fact"><div class="k">工具生态</div><div class="v">机票 / 酒店 / 天气 / 时间解析 / RAG 知识检索 / 差旅审批，@Tool 注解注册，模型自主调用</div></div>
+    <div class="fact"><div class="k">全链路观测</div><div class="v">21+ Span 追踪、深度火焰图、Mermaid 流程图、Prompt 快照、Token 与成本统计、故障演练</div></div>
+    <div class="fact"><div class="k">三模式模型层</div><div class="v">Mock 剧本（离线可复现）· OpenRouter 真模型（默认）· DashScope，无 Key / 超预算自动降级</div></div>
+  </div>
+  <div class="foot"><span class="dot"></span><span><b>Spring Boot 3.3</b> · <b>AgentScope 2.0.2</b> · 航班/酒店/天气为确定性演示数据，编排与观测链路真实执行</span></div>
+</div>
+</body>
+</html>
